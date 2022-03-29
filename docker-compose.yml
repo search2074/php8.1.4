@@ -5,6 +5,7 @@ services:
     image: "nginx:alpine"
     restart: always
     working_dir: /var/www/html
+    user: ${USER_ID:-0}:${GROUP_ID:-0}
     links:
       - php-fpm
     volumes:
@@ -19,6 +20,7 @@ services:
     build: docker/php-fpm
     restart: always
     working_dir: /var/www/html
+    user: ${USER_ID:-0}:${GROUP_ID:-0}
     links:
       - mariadb
     volumes:
@@ -29,6 +31,7 @@ services:
     image: "mariadb:10.7.3"
     restart: always
     working_dir: /var/www/html
+    user: ${USER_ID:-0}:${GROUP_ID:-0}
     volumes:
       - ".:/var/www/html"
       - "./docker/mariadb/data:/var/lib/mysql"
